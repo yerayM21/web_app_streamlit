@@ -11,12 +11,25 @@ st.header('Registro de vehiculos')
 #se lee el conjunto de datos de vehiculos
 car_data = pd.read_csv('/programacion/web_streamlit/web_app_streamlit/Data_set/vehicles_us.csv')
 
+#Filtrar los años
+filter_year = sorted(car_data['model_year'].unique())
+
+#seleccion de año del carro
+año_seleccionado = st.selectbox("**Selecciones el año del carro que desea**",filter_year,key='SelecionAño')
+
+if año_seleccionado:
+    total_carros_año = car_data['model_year'][(car_data['model_year'] == año_seleccionado)].count()
+    st.write(f"Existe {total_carros_año} carros del año {año_seleccionado}")
+    # Filtrar datos para el año seleccionado 
+    carros_del_año = car_data[(car_data['model_year'] == año_seleccionado)].head(10)
+
+    # Mostrar tabla de los 10 primeros carros para el año seleccionado
+    st.write(f"**Estos son los primeros 10 carros para el año {año_seleccionado}:**")
+    st.write(carros_del_año)
+
+
 # Selección de categoría
 categoria_seleccionada = st.selectbox("Seleccione la categoría", car_data.columns)
-
-#Barra lateral para seleccion
-ticker = st.sidebar.text_input('ticker')
-
 
 #Creacion de histograma en base a la columna seleccionada 
 if categoria_seleccionada:
