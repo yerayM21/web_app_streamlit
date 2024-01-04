@@ -9,7 +9,7 @@ st.set_page_config(page_title="Proyecto vehicular", page_icon=':car:', layout='c
 st.header('Registro de vehiculos')
 
 #se lee el conjunto de datos de vehiculos
-car_data = pd.read_csv('/programacion/web_streamlit/web_app_streamlit/Data_set/vehicles_us.csv')
+car_data = pd.read_csv('Data_set/vehicles_us.csv')
 
 #Filtrar los años
 filter_year = sorted(car_data['model_year'].unique())
